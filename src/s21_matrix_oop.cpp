@@ -2,5 +2,8 @@
 using namespace std;
 
 void S21Matrix::AllocateMemory_() {
-    
+  matrix_ = 
 }
+
+////////
+int main() {}
