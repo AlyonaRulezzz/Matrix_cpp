@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "s21_matrix_oop.h"
+#include "s21_matrix_oop.hpp"
 
 TEST(Constructors, Default) {
     S21Matrix m1;
