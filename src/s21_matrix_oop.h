@@ -19,7 +19,7 @@ class S21Matrix {
   // constructors
   S21Matrix();                        // default constructor
   S21Matrix(int rows, int cols);      // parameterized constructor
-  // S21Matrix(const S21Matrix& other);  // copy constructor
+  S21Matrix(const S21Matrix& other);  // copy constructor
   // S21Matrix(S21Matrix&& other);       // move constructor
   // ~S21Matrix();                       // destructor
 
@@ -53,6 +53,9 @@ class S21Matrix {
   S21Matrix& operator-=(const S21Matrix& other);
   S21Matrix& operator*=(const S21Matrix& other);
   S21Matrix& operator*=(const double& other);
+
+  void Fill(double n);
+  void Fill(double n, double add);
 };
 
 #endif
