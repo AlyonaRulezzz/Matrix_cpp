@@ -15,6 +15,13 @@ S21Matrix::S21Matrix() {
   AllocateMemory_();
 }
 
+S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
+  if (rows_ <= 0 || cols_ <= 0) {
+    throw std::out_of_range("Incorrect input: size less ");
+  }
+  AllocateMemory_();
+}
+
 // accessors and mutators
 int S21Matrix::GetRows() const { return rows_; }
 int S21Matrix::GetCols() const { return cols_; }
