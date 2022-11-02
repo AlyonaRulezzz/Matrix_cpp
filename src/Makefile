@@ -15,15 +15,15 @@ test: s21_matrix_oop.a s21_test.o
 	$(CC) $(CFLAGS) s21_test.o s21_matrix_oop.a $(TST_LIBS) -o test
 	@./test
 
-s21_test.o: s21_test.cpp
-	$(CC) $(CFLAGS) -c s21_test.cpp -o s21_test.o
+s21_test.o: s21_test.cc
+	$(CC) $(CFLAGS) -c s21_test.cc -o s21_test.o
 
 s21_matrix_oop.a: s21_matrix_oop.o
 	@ar rcs s21_matrix_oop.a s21_matrix_oop.o
 	ranlib s21_matrix_oop.a
 
-s21_matrix_oop.o: s21_matrix_oop.cpp
-	$(CC) $(CFLAGS) -c s21_matrix_oop.cpp -o s21_matrix_oop.o
+s21_matrix_oop.o: s21_matrix_oop.cc
+	$(CC) $(CFLAGS) -c s21_matrix_oop.cc -o s21_matrix_oop.o
 
 gcov_report: gcov_test.info
 	@genhtml -o report/ gcov_test.info
@@ -32,8 +32,8 @@ gcov_report: gcov_test.info
 gcov_test.info: gcov_test gcov_test.gcda
 	@lcov -t "gcov_test" -o gcov_test.info --no-external -c -d .
 
-gcov_test: s21_test.cpp s21_matrix_oop.cpp
-	$(CC) $(CFLAGS) --coverage s21_test.cpp s21_matrix_oop.cpp $(TST_LIBS) -o gcov_test
+gcov_test: s21_test.cc s21_matrix_oop.cc
+	$(CC) $(CFLAGS) --coverage s21_test.cc s21_matrix_oop.cc $(TST_LIBS) -o gcov_test
 
 gcov_test.gcda:
 	@chmod +x *
@@ -44,7 +44,7 @@ clean:
 	
 style:
 	# cp ../materials/linters/.clang-format ./
-	clang-format -n *.h *.cpp
+	clang-format -n *.h *.cc
 	
 valgrind:
 	valgrind --leak-check=full --track-origins=yes --trace-children=yes -s ./test
