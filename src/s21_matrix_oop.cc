@@ -159,7 +159,7 @@ const double &S21Matrix::operator()(int row, int col) const {
   return matrix_[row][col];
 }
 
-S21Matrix &S21Matrix::operator=(const S21Matrix &other) {
+S21Matrix &S21Matrix::operator=(const S21Matrix& other) {
   CleanMemory_();
   rows_ = other.rows_;
   cols_ = other.cols_;
