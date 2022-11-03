@@ -22,13 +22,14 @@ class S21Matrix {
   S21Matrix(int rows, int cols);      // parameterized constructor
   S21Matrix(const S21Matrix& other);  // copy constructor
   S21Matrix(S21Matrix&& other);       // move constructor
-  // ~S21Matrix();                       // destructor
+  ~S21Matrix();                       // destructor
 
   // accessors and mutators
   int GetRows() const;
   int GetCols() const;
   void SetRows(int rows);
   void SetCols(int cols);
+  double** GetMatrix() const;
 
   // public methods
   bool EqMatrix(const S21Matrix& other) const;

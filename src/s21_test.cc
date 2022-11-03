@@ -44,7 +44,25 @@ TEST(Constructors, Move) {
     EXPECT_EQ(false, m1.EqMatrix(test1));
 }
 
+TEST(Constructors, Destructor) {
+    S21Matrix m1(4, 5);
+    m1.Fill(0, 2);
+    m1.~S21Matrix();
+    EXPECT_EQ(0, m1.GetRows());
+    EXPECT_EQ(0, m1.GetCols());
+    EXPECT_EQ(nullptr, m1.GetMatrix());
+}
+
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
+}
+
+TEST(Method, Equal) {
+    S21Matrix m1(4, 5), test1(4, 5);
+    m1.Fill(5, 2);
+    test1.Fill(5, 1);
+    S21Matrix test2(m1);
+    EXPECT_EQ(false, m1.EqMatrix(test1));
+    EXPECT_EQ(true, m1.EqMatrix(test2));
 }

@@ -16,6 +16,13 @@ void S21Matrix::CopyValue_(const S21Matrix& other) {
   }
 }
 
+void S21Matrix::CleanMemory_() {
+  for (int i = 0; i < rows_; i++) {
+    delete[] matrix_[i];
+  }
+  delete[] matrix_;
+}
+
 // constructors
 S21Matrix::S21Matrix() {
   rows_ = 3;
@@ -42,9 +49,19 @@ S21Matrix::S21Matrix(S21Matrix&& other) : rows_(other.rows_), cols_(other.cols_)
   other.cols_= 0;
 }
 
+S21Matrix::~S21Matrix() {
+  if (matrix_) {
+      CleanMemory_();
+    }
+  rows_ = 0;
+  cols_ = 0;
+  matrix_ = nullptr;
+}
+
 // accessors and mutators
 int S21Matrix::GetRows() const { return rows_; }
 int S21Matrix::GetCols() const { return cols_; }
+double** S21Matrix::GetMatrix() const { return matrix_; }
 
 // add functions
 void S21Matrix::Fill(double n) {
