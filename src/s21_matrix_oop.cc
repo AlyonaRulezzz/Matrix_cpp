@@ -99,6 +99,36 @@ bool S21Matrix::EqMatrix(const S21Matrix& other) const {
   return true;
 }
 
+void S21Matrix::SumMatrix(const S21Matrix& other) {
+  if (rows_ != other.rows_ || cols_ != other.cols_) {
+    throw std::exception();
+  }
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
+      matrix_[i][j] += other.matrix_[i][j];
+    }
+  }
+}
+
+void S21Matrix::SubMatrix(const S21Matrix& other) {
+  if (rows_ != other.rows_ || cols_ != other.cols_) {
+    throw std::exception();
+  }
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
+      matrix_[i][j] -= other.matrix_[i][j];
+    }
+  }
+}
+
+void S21Matrix::MulNumber(const double num) {
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
+      matrix_[i][j] *= num;
+    }
+  }
+}
+
 // operators overloads
 double& S21Matrix::operator()(int row, int col) {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {

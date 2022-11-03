@@ -53,10 +53,6 @@ TEST(Constructors, Destructor) {
     EXPECT_EQ(nullptr, m1.GetMatrix());
 }
 
-int main(int argc, char *argv[]) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
 
 TEST(Method, Equal) {
     S21Matrix m1(4, 5), test1(4, 5);
@@ -65,4 +61,42 @@ TEST(Method, Equal) {
     S21Matrix test2(m1);
     EXPECT_EQ(false, m1.EqMatrix(test1));
     EXPECT_EQ(true, m1.EqMatrix(test2));
+}
+
+TEST(Method, Sum) {
+    S21Matrix m1(4, 5), m2(4, 5), m3(4, 5), m4(4, 5);
+    m1.Fill(3);
+    m2.Fill(6);
+    m3.Fill(8);
+    m4.Fill(9);
+    m1.SumMatrix(m2);
+    EXPECT_NE(false, m1.EqMatrix(m4));  //  means equal
+    EXPECT_EQ(false, m1.EqMatrix(m3));
+}
+
+TEST(Method, Sub) {
+    S21Matrix m1(4, 5), m2(4, 5), m3(4, 5), m4(4, 5);
+    m1.Fill(9);
+    m2.Fill(6);
+    m3.Fill(8);
+    m4.Fill(3);
+    m1.SubMatrix(m2);
+    EXPECT_NE(false, m1.EqMatrix(m4));  //  means equal
+    EXPECT_EQ(false, m1.EqMatrix(m3));
+}
+
+TEST(Method, MulNumber) {
+    S21Matrix m1(4, 5), m2(4, 5), m3(4, 5);
+    int num = 2;
+    m1.Fill(3);
+    m2.Fill(8);
+    m3.Fill(6);
+    m1.MulNumber(num);
+    EXPECT_NE(false, m1.EqMatrix(m3));  //  means equal
+    EXPECT_EQ(false, m1.EqMatrix(m2));
+}
+
+int main(int argc, char *argv[]) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
