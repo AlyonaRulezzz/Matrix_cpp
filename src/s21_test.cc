@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "s21_matrix_oop.h"
 
+using namespace std;
+
 TEST(Constructors, Default) {
     S21Matrix m1;
     EXPECT_EQ(3, m1.GetRows());
@@ -29,6 +31,17 @@ TEST(Constructors, Copy) {
             EXPECT_EQ(test1(i, j), m1(i, j));
         }
     }
+}
+
+TEST(Constructors, Move) {
+    S21Matrix test1(4, 5);
+    test1.Fill(0, 2);
+    S21Matrix res1(test1);
+    S21Matrix m1(move(test1));
+    EXPECT_EQ(m1.GetRows(), res1.GetRows());
+    EXPECT_EQ(m1.GetCols(), res1.GetCols());
+    EXPECT_EQ(true, m1.EqMatrix(res1));
+    EXPECT_EQ(false, m1.EqMatrix(test1));
 }
 
 int main(int argc, char *argv[]) {

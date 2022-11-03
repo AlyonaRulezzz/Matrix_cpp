@@ -35,6 +35,13 @@ S21Matrix::S21Matrix(const S21Matrix& other) : rows_(other.rows_), cols_(other.c
   CopyValue_(other);
 }
 
+S21Matrix::S21Matrix(S21Matrix&& other) : rows_(other.rows_), cols_(other.cols_) {
+  matrix_ = other.matrix_; // CopyValue_(other);
+  other.matrix_ = nullptr;
+  other.rows_ = 0;
+  other.cols_= 0;
+}
+
 // accessors and mutators
 int S21Matrix::GetRows() const { return rows_; }
 int S21Matrix::GetCols() const { return cols_; }
@@ -55,6 +62,24 @@ void S21Matrix::Fill(double n, double add) {
       n += add;
     }
   }
+}
+
+// public methods
+bool S21Matrix::EqMatrix(const S21Matrix& other) const {
+  if (rows_ == other.rows_ && cols_ == other.cols_) {
+    for (int i = 0; i < rows_; i++) {
+      for (int j = 0; j < cols_; j++) {
+        if (fabs(matrix_[i][j] - other.matrix_[i][j]) > 0.0000001) {
+          i = rows_;  /* break */
+          j = cols_;  /* break */
+          return false;
+        }
+      }
+    }
+  } else {
+    return false;
+  }
+  return true;
 }
 
 // operators overloads
