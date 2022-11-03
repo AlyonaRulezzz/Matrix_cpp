@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
 class S21Matrix {
  private:
@@ -58,6 +59,8 @@ class S21Matrix {
 
   void Fill(double n);
   void Fill(double n, double add);
+
+  void Pr() const;
 };
 
 #endif

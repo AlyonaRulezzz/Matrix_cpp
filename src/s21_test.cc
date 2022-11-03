@@ -96,6 +96,51 @@ TEST(Method, MulNumber) {
     EXPECT_EQ(false, m1.EqMatrix(m2));
 }
 
+TEST(Methods, MultMatrix) {
+  S21Matrix m1;
+  m1.Fill(1, 1);
+  S21Matrix test1;
+  test1.Fill(4);
+  m1.MulMatrix(test1);
+  S21Matrix res1;
+  res1(0, 0) = 24;
+  res1(0, 1) = 24;
+  res1(0, 2) = 24;
+  res1(1, 0) = 60;
+  res1(1, 1) = 60;
+  res1(1, 2) = 60;
+  res1(2, 0) = 96;
+  res1(2, 1) = 96;
+  res1(2, 2) = 96;
+
+  S21Matrix m2(2, 4);
+  m2.Fill(2, 0.2);
+  S21Matrix test2(3, 2);
+  test2.Fill(4);
+  test2.MulMatrix(m2);
+  S21Matrix res2(3, 4);
+  res2(0, 0) = 19.2;
+  res2(0, 1) = 20.8;
+  res2(0, 2) = 22.4;
+  res2(0, 3) = 24;
+  res2(1, 0) = 19.2;
+  res2(1, 1) = 20.8;
+  res2(1, 2) = 22.4;
+  res2(1, 3) = 24;
+  res2(2, 0) = 19.2;
+  res2(2, 1) = 20.8;
+  res2(2, 2) = 22.4;
+  res2(2, 3) = 24;
+
+  EXPECT_EQ(true, m1.EqMatrix(res1));
+  EXPECT_EQ(true, test2.EqMatrix(res2));
+  EXPECT_ANY_THROW(m1.MulMatrix(m2));
+
+//   m1.Pr();
+//   cout << "\n";
+//   res1.Pr();
+}
+
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

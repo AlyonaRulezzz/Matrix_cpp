@@ -4,7 +4,7 @@ using namespace std;
 void S21Matrix::AllocateMemory_() {
   matrix_ = new double *[rows_];
   for (int i = 0; i < rows_; i++) {
-    matrix_[i] = new double[cols_];
+    matrix_[i] = new double[cols_]();
   }
 }
 
@@ -129,6 +129,21 @@ void S21Matrix::MulNumber(const double num) {
   }
 }
 
+void S21Matrix::MulMatrix(const S21Matrix& other) {
+  if (cols_ != other.rows_) {
+    throw std::exception();
+  }
+  S21Matrix tmp(rows_, other.cols_);
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < other.cols_; j++) {
+      for (int k = 0; k < cols_; k++) {
+        tmp.matrix_[i][j] += matrix_[i][k] * other.matrix_[k][j];
+      }
+    }
+  }
+  *this = tmp;
+}
+
 // operators overloads
 double& S21Matrix::operator()(int row, int col) {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {
@@ -142,6 +157,24 @@ const double &S21Matrix::operator()(int row, int col) const {
     throw std::out_of_range("Incorrect input: index is out of range");
   }
   return matrix_[row][col];
+}
+
+S21Matrix &S21Matrix::operator=(const S21Matrix &other) {
+  CleanMemory_();
+  rows_ = other.rows_;
+  cols_ = other.cols_;
+  AllocateMemory_();
+  CopyValue_(other);
+  return *this;
+}
+
+void S21Matrix::Pr() const {
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
+      cout << setw(15) << setprecision(10) << matrix_[i][j];
+    }
+    cout << endl;
+  }
 }
 
 ////////
