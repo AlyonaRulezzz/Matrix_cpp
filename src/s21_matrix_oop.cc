@@ -8,6 +8,14 @@ void S21Matrix::AllocateMemory_() {
   }
 }
 
+void S21Matrix::CopyValue_(const S21Matrix& other) {
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
+      matrix_[i][j] = other.matrix_[i][j];
+    }
+  }
+}
+
 // constructors
 S21Matrix::S21Matrix() {
   rows_ = 3;
@@ -20,6 +28,11 @@ S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
     throw std::out_of_range("Incorrect input: size less ");
   }
   AllocateMemory_();
+}
+
+S21Matrix::S21Matrix(const S21Matrix& other) : rows_(other.rows_), cols_(other.cols_) {
+  AllocateMemory_();
+  CopyValue_(other);
 }
 
 // accessors and mutators
@@ -45,16 +58,16 @@ void S21Matrix::Fill(double n, double add) {
 }
 
 // operators overloads
-double& operator()(int row, int col) {
+double& S21Matrix::operator()(int row, int col) {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {
-    throw std::out_of_range("Incorrect input, index is out of range");
+    throw std::out_of_range("Incorrect input: index is out of range");
   }
   return matrix_[row][col];
 }
 
 const double &S21Matrix::operator()(int row, int col) const {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {
-    throw std::out_of_range("Incorrect input, index is out of range");
+    throw std::out_of_range("Incorrect input: index is out of range");
   }
   return matrix_[row][col];
 }

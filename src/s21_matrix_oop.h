@@ -42,7 +42,7 @@ class S21Matrix {
 
   // operators overloads
   double& operator()(int row, int col);
-  double& operator()(int row, int col) const;
+  const double& operator()(int row, int col) const;
   bool operator==(const S21Matrix& other) const;
   S21Matrix operator*(const double& other) const;
   S21Matrix operator*(const S21Matrix& other) const;
