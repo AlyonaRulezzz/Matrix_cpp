@@ -236,6 +236,12 @@ TEST(Methods, Inverse) {
   EXPECT_ANY_THROW(m3.InverseMatrix());
 }
 
+TEST(Operator, Sum) {
+  S21Matrix m1, m2, m3;
+  m1.Fill(1, 1), m2.Fill(1, 1), m3.Fill(2, 2);
+  S21Matrix m4 = m1 + m2;
+  EXPECT_EQ(true, m3.EqMatrix(m4));
+}
 
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);

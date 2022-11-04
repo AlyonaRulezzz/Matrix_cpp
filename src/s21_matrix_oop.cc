@@ -247,9 +247,9 @@ S21Matrix S21Matrix::InverseMatrix() {
 
 // operators overloads
 S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
-  if (rows_ != other.rows_ || cols_ != other.cols_) {
-    throw std::out_of_range("Incorrect input: different matrix size");
-  }
+  S21Matrix tmp(*this);
+  tmp.SumMatrix(other);
+  return tmp;
 }
 
 double& S21Matrix::operator()(int row, int col) {
