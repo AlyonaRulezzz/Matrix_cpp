@@ -96,7 +96,7 @@ TEST(Method, MulNumber) {
     EXPECT_EQ(false, m1.EqMatrix(m2));
 }
 
-TEST(Methods, MultMatrix) {
+TEST(Method, MultMatrix) {
   S21Matrix m1;
   m1.Fill(1, 1);
   S21Matrix test1;
@@ -141,7 +141,7 @@ TEST(Methods, MultMatrix) {
 //   res1.Pr();
 }
 
-TEST(Methods, Transpose) {
+TEST(Method, Transpose) {
   S21Matrix m1, m2;
   m1.Fill(1, 1);
   m1.Transpose();
@@ -162,7 +162,7 @@ TEST(Methods, Transpose) {
   // m1.Transpose().Pr();
 }
 
-TEST(Methods, Complements) {
+TEST(Method, Complements) {
   S21Matrix m1, res1, test1;
   m1.Fill(1, 1);
   test1 = m1.CalcComplements();
@@ -187,7 +187,7 @@ TEST(Methods, Complements) {
 	cout << "\n";
 }
 
-TEST(Methods, Determinant) {
+TEST(Method, Determinant) {
   S21Matrix m1, test1;
   m1.Fill(1, 1);
 	double det1;
@@ -206,4 +206,36 @@ TEST(Methods, Determinant) {
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
+}
+
+TEST(Methods, Inverse) {
+  S21Matrix m1;
+  m1(0, 0) = 1;
+  m1(0, 1) = 6;
+  m1(0, 2) = 4;
+  m1(1, 0) = 9;
+  m1(1, 1) = 2;
+  m1(1, 2) = 8;
+  m1(2, 0) = 5;
+  m1(2, 1) = 7;
+  m1(2, 2) = 3;
+  S21Matrix test1 = m1.InverseMatrix();
+  S21Matrix res1;
+  res1(0, 0) = -0.208333333;
+  res1(0, 1) = 0.0416666667;
+  res1(0, 2) = 0.1666666667;
+  res1(1, 0) = 0.0541666667;
+  res1(1, 1) = -0.070833333;
+  res1(1, 2) = 0.1166666667;
+  res1(2, 0) = 0.2208333333;
+  res1(2, 1) = 0.0958333333;
+  res1(2, 2) = -0.216666667;
+  EXPECT_EQ(true, test1.EqMatrix(res1));
+
+  S21Matrix m2(2, 3);
+  EXPECT_ANY_THROW(m2.InverseMatrix());
+
+  S21Matrix m3;
+  m3.Fill(1, 1);
+  EXPECT_ANY_THROW(m3.InverseMatrix());
 }

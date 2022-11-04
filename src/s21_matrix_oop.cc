@@ -235,6 +235,16 @@ double S21Matrix::Determinant() {
   return determinant;
 }
 
+S21Matrix S21Matrix::InverseMatrix() {
+  if (Determinant() == 0) {
+    throw::exception();
+  }
+  S21Matrix alg_dop = CalcComplements();
+  S21Matrix transpose_alg_dop = alg_dop.Transpose();
+  transpose_alg_dop.MulNumber(pow(Determinant(), -1));
+  return transpose_alg_dop;
+}
+
 // operators overloads
 double& S21Matrix::operator()(int row, int col) {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {
