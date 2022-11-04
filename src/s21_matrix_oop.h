@@ -59,6 +59,7 @@ class S21Matrix {
 
   void Fill(double n);
   void Fill(double n, double add);
+  void FillRev(double n, double sub);
 
   void Pr() const;
 };

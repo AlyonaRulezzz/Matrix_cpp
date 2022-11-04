@@ -81,6 +81,15 @@ void S21Matrix::Fill(double n, double add) {
   }
 }
 
+void S21Matrix::FillRev(double n, double sub) {
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
+      matrix_[i][j] = n;
+      n -= sub;
+    }
+  }
+}
+
 // public methods
 bool S21Matrix::EqMatrix(const S21Matrix& other) const {
   if (rows_ == other.rows_ && cols_ == other.cols_) {
@@ -142,6 +151,16 @@ void S21Matrix::MulMatrix(const S21Matrix& other) {
     }
   }
   *this = tmp;
+}
+
+S21Matrix S21Matrix::Transpose() {
+  S21Matrix tmp(rows_, cols_);
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
+      tmp.matrix_[j][i] = matrix_[i][j];
+    }
+  }
+  return tmp;
 }
 
 // operators overloads

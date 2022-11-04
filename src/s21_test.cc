@@ -141,6 +141,27 @@ TEST(Methods, MultMatrix) {
 //   res1.Pr();
 }
 
+TEST(Methods, Transpose) {
+  S21Matrix m1, m2;
+  m1.Fill(1, 1);
+  m1.Transpose();
+  m2(0, 0) = 1;
+  m2(0, 1) = 4;
+  m2(0, 2) = 7;
+  m2(1, 0) = 2;
+  m2(1, 1) = 5;
+  m2(1, 2) = 8;
+  m2(2, 0) = 3;
+  m2(2, 1) = 6;
+  m2(2, 2) = 9;
+
+  EXPECT_EQ(true, m2.EqMatrix(m1.Transpose()));
+
+  // m1.Pr();
+  // cout << "\n";
+  // m1.Transpose().Pr();
+}
+
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
