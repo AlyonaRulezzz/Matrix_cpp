@@ -2,7 +2,7 @@
 using namespace std;
 
 void S21Matrix::AllocateMemory_() {
-  matrix_ = new double *[rows_];
+  matrix_ = new double*[rows_];
   for (int i = 0; i < rows_; i++) {
     matrix_[i] = new double[cols_]();
   }
@@ -23,6 +23,48 @@ void S21Matrix::CleanMemory_() {
   delete[] matrix_;
 }
 
+double S21Matrix::Det_(int n) {
+  double det = 0;
+  if (n == 2) {
+    det = matrix_[0][0] * matrix_[1][1] - matrix_[1][0] * matrix_[0][1];
+  } else {
+    S21Matrix submat(rows_, cols_);
+    for (int c = 0; c < n; c++) {
+      int sub_i = 0;
+      for (int i = 1; i < n; i++) {
+        int sub_j = 0;
+        for (int j = 0; j < n; j++) {
+          if (j != c) {
+            submat.matrix_[sub_i][sub_j] = matrix_[i][j];
+            sub_j++;
+          }
+        }
+        sub_i++;
+      }
+      det += pow(-1, c) * matrix_[0][c] * submat.Det_(n - 1);
+    }
+  }
+  return det;
+}
+
+S21Matrix S21Matrix::MiniMatrix_(int n, int c) {
+  S21Matrix minimat(rows_ - 1, cols_ - 1);
+  int sub_i = 0;
+  for (int i = 0; i < rows_; i++) {
+    int sub_j = 0;
+    if (i != n) {
+      for (int j = 0; j < cols_; j++) {
+        if (j != c) {
+          minimat.matrix_[sub_i][sub_j] = matrix_[i][j];
+          sub_j++;
+        }
+      }
+      sub_i++;
+    }
+  }
+  return minimat;
+}
+
 // constructors
 S21Matrix::S21Matrix() {
   rows_ = 3;
@@ -37,22 +79,24 @@ S21Matrix::S21Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
   AllocateMemory_();
 }
 
-S21Matrix::S21Matrix(const S21Matrix& other) : rows_(other.rows_), cols_(other.cols_) {
+S21Matrix::S21Matrix(const S21Matrix& other)
+    : rows_(other.rows_), cols_(other.cols_) {
   AllocateMemory_();
   CopyValue_(other);
 }
 
-S21Matrix::S21Matrix(S21Matrix&& other) : rows_(other.rows_), cols_(other.cols_) {
-  matrix_ = other.matrix_; // CopyValue_(other);
+S21Matrix::S21Matrix(S21Matrix&& other)
+    : rows_(other.rows_), cols_(other.cols_) {
+  matrix_ = other.matrix_;  // CopyValue_(other);
   other.matrix_ = nullptr;
   other.rows_ = 0;
-  other.cols_= 0;
+  other.cols_ = 0;
 }
 
 S21Matrix::~S21Matrix() {
   if (matrix_) {
-      CleanMemory_();
-    }
+    CleanMemory_();
+  }
   rows_ = 0;
   cols_ = 0;
   matrix_ = nullptr;
@@ -96,8 +140,8 @@ bool S21Matrix::EqMatrix(const S21Matrix& other) const {
     for (int i = 0; i < rows_; i++) {
       for (int j = 0; j < cols_; j++) {
         if (fabs(matrix_[i][j] - other.matrix_[i][j]) > 0.0000001) {
-          i = rows_;  /* break */
-          j = cols_;  /* break */
+          i = rows_; /* break */
+          j = cols_; /* break */
           return false;
         }
       }
@@ -163,6 +207,34 @@ S21Matrix S21Matrix::Transpose() {
   return tmp;
 }
 
+S21Matrix S21Matrix::CalcComplements() {
+  if (rows_ != cols_) {
+    throw std::out_of_range("Incorrect input: it's not a square matrix");
+  }
+  S21Matrix tmp(rows_, cols_);
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
+      S21Matrix minor_mat = this->MiniMatrix_(i, j);
+      double r = minor_mat.Determinant();
+      tmp.matrix_[i][j] = pow((-1), i + j) * r;
+    }
+  }
+  return tmp;
+}
+
+double S21Matrix::Determinant() {
+  if (rows_ != cols_) {
+    throw std::out_of_range("Incorrect input: it's not a square matrix");
+  }
+  double determinant;
+  if (rows_ == 1) {
+    determinant = matrix_[0][0];
+  } else {
+    determinant = this->Det_(rows_);
+  }
+  return determinant;
+}
+
 // operators overloads
 double& S21Matrix::operator()(int row, int col) {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {
@@ -171,14 +243,14 @@ double& S21Matrix::operator()(int row, int col) {
   return matrix_[row][col];
 }
 
-const double &S21Matrix::operator()(int row, int col) const {
+const double& S21Matrix::operator()(int row, int col) const {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {
     throw std::out_of_range("Incorrect input: index is out of range");
   }
   return matrix_[row][col];
 }
 
-S21Matrix &S21Matrix::operator=(const S21Matrix& other) {
+S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
   CleanMemory_();
   rows_ = other.rows_;
   cols_ = other.cols_;
