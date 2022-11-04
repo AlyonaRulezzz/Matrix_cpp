@@ -203,10 +203,6 @@ TEST(Method, Determinant) {
 	cout << m1.Determinant();
 	cout << "\n";
 }
-int main(int argc, char *argv[]) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
 
 TEST(Methods, Inverse) {
   S21Matrix m1;
@@ -238,4 +234,10 @@ TEST(Methods, Inverse) {
   S21Matrix m3;
   m3.Fill(1, 1);
   EXPECT_ANY_THROW(m3.InverseMatrix());
+}
+
+
+int main(int argc, char *argv[]) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

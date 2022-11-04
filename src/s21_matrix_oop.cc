@@ -237,7 +237,7 @@ double S21Matrix::Determinant() {
 
 S21Matrix S21Matrix::InverseMatrix() {
   if (Determinant() == 0) {
-    throw::exception();
+    throw ::exception();
   }
   S21Matrix alg_dop = CalcComplements();
   S21Matrix transpose_alg_dop = alg_dop.Transpose();
@@ -246,6 +246,12 @@ S21Matrix S21Matrix::InverseMatrix() {
 }
 
 // operators overloads
+S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
+  if (rows_ != other.rows_ || cols_ != other.cols_) {
+    throw std::out_of_range("Incorrect input: different matrix size");
+  }
+}
+
 double& S21Matrix::operator()(int row, int col) {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {
     throw std::out_of_range("Incorrect input: index is out of range");
@@ -269,6 +275,7 @@ S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
   return *this;
 }
 
+// print
 void S21Matrix::Pr() const {
   for (int i = 0; i < rows_; i++) {
     for (int j = 0; j < cols_; j++) {
