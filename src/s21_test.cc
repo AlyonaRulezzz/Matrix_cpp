@@ -259,6 +259,22 @@ TEST(Operator, Sub) {
 	// cout << "\n";
 }
 
+TEST(Operator, MulNum) {
+  S21Matrix m1, m2;
+  m1.Fill(2), m2.Fill(10);
+  S21Matrix m3= m1 * 5;
+  EXPECT_EQ(true, m2.EqMatrix(m3));
+
+  // m1.Pr();
+  // cout << "\n";
+  // m2.Pr();
+	// cout << "\n";
+  // m3.Pr();
+	// cout << "\n";
+  // m4.Pr();
+	// cout << "\n";
+}
+
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
