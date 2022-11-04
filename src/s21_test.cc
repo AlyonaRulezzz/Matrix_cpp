@@ -187,6 +187,22 @@ TEST(Methods, Complements) {
 	cout << "\n";
 }
 
+TEST(Methods, Determinant) {
+  S21Matrix m1, test1;
+  m1.Fill(1, 1);
+	double det1;
+  det1 = m1.Determinant();
+  EXPECT_EQ(0, det1);
+
+  S21Matrix m2(4, 5);
+  EXPECT_ANY_THROW(m2.Determinant());
+
+	// m1.Pr();
+  cout << "\n";
+  m1.CalcComplements().Pr();
+	cout << m1.Determinant();
+	cout << "\n";
+}
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
