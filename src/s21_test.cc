@@ -198,10 +198,10 @@ TEST(Method, Determinant) {
   EXPECT_ANY_THROW(m2.Determinant());
 
 	// m1.Pr();
-  cout << "\n";
-  m1.CalcComplements().Pr();
-	cout << m1.Determinant();
-	cout << "\n";
+  // cout << "\n";
+  // m1.CalcComplements().Pr();
+	// cout << m1.Determinant();
+	// cout << "\n";
 }
 
 TEST(Methods, Inverse) {
@@ -241,6 +241,22 @@ TEST(Operator, Sum) {
   m1.Fill(1, 1), m2.Fill(1, 1), m3.Fill(2, 2);
   S21Matrix m4 = m1 + m2;
   EXPECT_EQ(true, m3.EqMatrix(m4));
+}
+
+TEST(Operator, Sub) {
+  S21Matrix m1, m2, m3;
+  m1.Fill(99, 1), m2.Fill(1, 1), m3.Fill(98);
+  S21Matrix m4 = m1 - m2;
+  EXPECT_EQ(true, m3.EqMatrix(m4));
+
+  // m1.Pr();
+  // cout << "\n";
+  // m2.Pr();
+	// cout << "\n";
+  // m3.Pr();
+	// cout << "\n";
+  // m4.Pr();
+	// cout << "\n";
 }
 
 int main(int argc, char *argv[]) {

@@ -252,6 +252,12 @@ S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
   return tmp;
 }
 
+S21Matrix S21Matrix::operator-(const S21Matrix& other) const {
+  S21Matrix tmp(*this);
+  tmp.SubMatrix(other);
+  return tmp;
+}
+
 double& S21Matrix::operator()(int row, int col) {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {
     throw std::out_of_range("Incorrect input: index is out of range");
