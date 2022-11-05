@@ -307,6 +307,20 @@ TEST(Operator, MulMatAssign) {
   EXPECT_ANY_THROW(m1 *= m5);
 }
 
+TEST(Operator, Index) {
+  S21Matrix m1;
+  m1.Fill(6);
+  EXPECT_EQ(6, m1(0, 0));
+
+  m1(0, 0) = 1;
+  EXPECT_EQ(1, m1(0, 0));
+
+  EXPECT_ANY_THROW(m1(0, -4));
+
+  const S21Matrix m2;
+  EXPECT_EQ(0, m2(0, 0));
+}
+
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
