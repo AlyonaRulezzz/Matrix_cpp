@@ -290,6 +290,14 @@ TEST(Operator, SubAssign) {
   EXPECT_ANY_THROW(m1 -= m4);
 }
 
+TEST(Operator, MulNumAssign) {
+  S21Matrix m1, m2;
+  m1.Fill(5), m2.Fill(10);
+  double num = 2;
+  m1 *= num;
+  EXPECT_EQ(true, m1.EqMatrix(m2));
+}
+
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
