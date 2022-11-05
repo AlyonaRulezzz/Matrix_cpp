@@ -267,6 +267,17 @@ TEST(Operator, Equal){
   EXPECT_NE(true, m1 == m3);
 }
 
+TEST(Operator, Assignment) {
+  S21Matrix m1, m2;
+  m1.Fill(7, 5), m2.Fill(8, 5);
+  m1 = m2;
+  EXPECT_EQ(true, m1.EqMatrix(m2));
+
+  m1.Pr();
+  cout << "\n";
+  m2.Pr();
+}
+
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

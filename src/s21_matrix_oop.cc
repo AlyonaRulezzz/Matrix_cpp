@@ -274,6 +274,15 @@ bool S21Matrix::operator==(const S21Matrix& other) const {
   return EqMatrix(other);
 }
 
+S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
+  CleanMemory_();
+  rows_ = other.rows_;
+  cols_ = other.cols_;
+  AllocateMemory_();
+  CopyValue_(other);
+  return *this;
+}
+
 double& S21Matrix::operator()(int row, int col) {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {
     throw std::out_of_range("Incorrect input: index is out of range");
@@ -286,15 +295,6 @@ const double& S21Matrix::operator()(int row, int col) const {
     throw std::out_of_range("Incorrect input: index is out of range");
   }
   return matrix_[row][col];
-}
-
-S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
-  CleanMemory_();
-  rows_ = other.rows_;
-  cols_ = other.cols_;
-  AllocateMemory_();
-  CopyValue_(other);
-  return *this;
 }
 
 // print
