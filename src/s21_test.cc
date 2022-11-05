@@ -272,10 +272,14 @@ TEST(Operator, Assignment) {
   m1.Fill(7, 5), m2.Fill(8, 5);
   m1 = m2;
   EXPECT_EQ(true, m1.EqMatrix(m2));
+}
 
-  m1.Pr();
-  cout << "\n";
-  m2.Pr();
+TEST(Operator, SumAssign) {
+  S21Matrix m1, m2, m3, m4(2, 5);
+  m1.Fill(1), m2.Fill(4), m3.Fill(5);
+  m1 += m2;
+  EXPECT_EQ(true, m1.EqMatrix(m3));
+  // EXPECT_ANY_THROW(m1 += m4);
 }
 
 int main(int argc, char *argv[]) {
