@@ -279,7 +279,15 @@ TEST(Operator, SumAssign) {
   m1.Fill(1), m2.Fill(4), m3.Fill(5);
   m1 += m2;
   EXPECT_EQ(true, m1.EqMatrix(m3));
-  // EXPECT_ANY_THROW(m1 += m4);
+  EXPECT_ANY_THROW(m1 += m4);
+}
+
+TEST(Operator, SubAssign) {
+  S21Matrix m1, m2, m3, m4(2, 5);
+  m1.Fill(5), m2.Fill(4), m3.Fill(1);
+  m1 -= m2;
+  EXPECT_EQ(true, m1.EqMatrix(m3));
+  EXPECT_ANY_THROW(m1 -= m4);
 }
 
 int main(int argc, char *argv[]) {
