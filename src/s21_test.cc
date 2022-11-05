@@ -256,8 +256,15 @@ TEST(Operator, MulMat) {
   m1.Fill(4), m2.Fill(4), m3.Fill(48);
   m4 = m1 * m2;
   EXPECT_EQ(true, m3.EqMatrix(m4));
-  
+
   EXPECT_ANY_THROW(m1 * m5);
+}
+
+TEST(Operator, Equal){
+  S21Matrix m1, m2, m3;
+  m1.Fill(7, 5), m2.Fill(7,5), m3.Fill(8, 5);
+  EXPECT_EQ(true, m1 == m2);
+  EXPECT_NE(true, m1 == m3);
 }
 
 int main(int argc, char *argv[]) {

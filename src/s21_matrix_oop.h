@@ -44,23 +44,23 @@ class S21Matrix {
   S21Matrix InverseMatrix();
 
   // operators overloads
-  double& operator()(int row, int col);
-  const double& operator()(int row, int col) const;
-  bool operator==(const S21Matrix& other) const;
+  S21Matrix operator+(const S21Matrix& other) const;
+  S21Matrix operator-(const S21Matrix& other) const;
   S21Matrix operator*(const double& num) const;
   S21Matrix operator*(const S21Matrix& other) const;
-  S21Matrix operator-(const S21Matrix& other) const;
-  S21Matrix operator+(const S21Matrix& other) const;
+  bool operator==(const S21Matrix& other) const;
   S21Matrix& operator=(const S21Matrix& other);
   S21Matrix& operator+=(const S21Matrix& other);
   S21Matrix& operator-=(const S21Matrix& other);
-  S21Matrix& operator*=(const S21Matrix& other);
   S21Matrix& operator*=(const double& other);
+  S21Matrix& operator*=(const S21Matrix& other);
+  double& operator()(int row, int col);
+  const double& operator()(int row, int col) const;
 
+  // fill matrix & print
   void Fill(double n);
   void Fill(double n, double add);
   void FillRev(double n, double sub);
-
   void Pr() const;
 };
 
