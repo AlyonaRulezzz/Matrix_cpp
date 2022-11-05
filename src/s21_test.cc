@@ -96,7 +96,7 @@ TEST(Method, MulNumber) {
     EXPECT_EQ(false, m1.EqMatrix(m2));
 }
 
-TEST(Method, MultMatrix) {
+TEST(Method, MulMatrix) {
   S21Matrix m1;
   m1.Fill(1, 1);
   S21Matrix test1;
@@ -179,12 +179,6 @@ TEST(Method, Complements) {
 
   S21Matrix m2(4, 5);
   EXPECT_ANY_THROW(m2.CalcComplements());
-
-	// m1.Pr();
-  cout << "\n";
-  m1.CalcComplements().Pr();
-	cout << m1.Determinant();
-	cout << "\n";
 }
 
 TEST(Method, Determinant) {
@@ -248,15 +242,6 @@ TEST(Operator, Sub) {
   m1.Fill(99, 1), m2.Fill(1, 1), m3.Fill(98);
   S21Matrix m4 = m1 - m2;
   EXPECT_EQ(true, m3.EqMatrix(m4));
-
-  // m1.Pr();
-  // cout << "\n";
-  // m2.Pr();
-	// cout << "\n";
-  // m3.Pr();
-	// cout << "\n";
-  // m4.Pr();
-	// cout << "\n";
 }
 
 TEST(Operator, MulNum) {
@@ -264,15 +249,15 @@ TEST(Operator, MulNum) {
   m1.Fill(2), m2.Fill(10);
   S21Matrix m3= m1 * 5;
   EXPECT_EQ(true, m2.EqMatrix(m3));
+}
 
-  // m1.Pr();
-  // cout << "\n";
-  // m2.Pr();
-	// cout << "\n";
-  // m3.Pr();
-	// cout << "\n";
-  // m4.Pr();
-	// cout << "\n";
+TEST(Operator, MulMat) {
+  S21Matrix m1, m2, m3, m4, m5(1, 3);
+  m1.Fill(4), m2.Fill(4), m3.Fill(48);
+  m4 = m1 * m2;
+  EXPECT_EQ(true, m3.EqMatrix(m4));
+  
+  EXPECT_ANY_THROW(m1 * m5);
 }
 
 int main(int argc, char *argv[]) {
