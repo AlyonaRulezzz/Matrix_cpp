@@ -40,10 +40,11 @@ gcov_test.gcda:
 	@./gcov_test
 
 clean: 
-	@rm -rf test gcov_test *.gcno *.gcda *.info report *.o *.a
+	@rm -rf *.o *.a test gcov_test *.gcno *.gcda *.info report
 	
 style:
 	# cp ../materials/linters/.clang-format ./
+	clang-format -i *.h *.cc
 	clang-format -n *.h *.cc
 	
 valgrind:
