@@ -135,10 +135,6 @@ TEST(Method, MulMatrix) {
   EXPECT_EQ(true, m1.EqMatrix(res1));
   EXPECT_EQ(true, test2.EqMatrix(res2));
   EXPECT_ANY_THROW(m1.MulMatrix(m2));
-
-  //   m1.Pr();
-  //   cout << "\n";
-  //   res1.Pr();
 }
 
 TEST(Method, Transpose) {
@@ -156,10 +152,6 @@ TEST(Method, Transpose) {
   m2(2, 2) = 9;
 
   EXPECT_EQ(true, m2.EqMatrix(m1.Transpose()));
-
-  // m1.Pr();
-  // cout << "\n";
-  // m1.Transpose().Pr();
 }
 
 TEST(Method, Complements) {
@@ -190,12 +182,6 @@ TEST(Method, Determinant) {
 
   S21Matrix m2(4, 5);
   EXPECT_ANY_THROW(m2.Determinant());
-
-  // m1.Pr();
-  // cout << "\n";
-  // m1.CalcComplements().Pr();
-  // cout << m1.Determinant();
-  // cout << "\n";
 }
 
 TEST(Methods, Inverse) {

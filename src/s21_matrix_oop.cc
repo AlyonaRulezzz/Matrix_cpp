@@ -242,7 +242,7 @@ S21Matrix S21Matrix::CalcComplements() {
   S21Matrix tmp(rows_, cols_);
   for (int i = 0; i < rows_; i++) {
     for (int j = 0; j < cols_; j++) {
-      S21Matrix minor_mat = this->MiniMatrix_(i, j);
+      S21Matrix minor_mat = MiniMatrix_(i, j);
       double r = minor_mat.Determinant();
       tmp.matrix_[i][j] = pow((-1), i + j) * r;
     }
@@ -258,7 +258,7 @@ double S21Matrix::Determinant() {
   if (rows_ == 1) {
     determinant = matrix_[0][0];
   } else {
-    determinant = this->Det_(rows_);
+    determinant = Det_(rows_);
   }
   return determinant;
 }
@@ -338,7 +338,7 @@ double& S21Matrix::operator()(int row, int col) {
   return matrix_[row][col];
 }
 
-const double& S21Matrix::operator()(int row, int col) const {
+double& S21Matrix::operator()(int row, int col) const {
   if (row >= rows_ || col >= cols_ || row < 0 || col < 0) {
     throw std::out_of_range("Incorrect input: index is out of range");
   }
@@ -354,6 +354,3 @@ void S21Matrix::Pr() const {
     cout << endl;
   }
 }
-
-////////
-// int main() {}

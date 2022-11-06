@@ -7,7 +7,7 @@ TST_LIBS := -lgtest -lm -lpthread
 
 # цели all, clean, test, s21_matrix_oop.a
 
-all: test s21_matrix_oop.a
+all: test
 
 re: clean test
 
@@ -40,15 +40,12 @@ gcov_test.gcda:
 	@./gcov_test
 
 clean: 
-	@rm -rf *.o *.a test gcov_test *.gcno *.gcda *.info report
+	@rm -rf *.o *.a test gcov_test *.gcno *.gcda *.info report *.dSYM
 	
 style:
 	# cp ../materials/linters/.clang-format ./
 	clang-format -i *.h *.cc
 	clang-format -n *.h *.cc
-	
-valgrind:
-	valgrind --leak-check=full --track-origins=yes --trace-children=yes -s ./test
 
 leak:
 	CK_FORK=no leaks -atExit -- ./test

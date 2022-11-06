@@ -55,7 +55,7 @@ class S21Matrix {
   S21Matrix& operator*=(const double& num);
   S21Matrix& operator*=(const S21Matrix& other);
   double& operator()(int row, int col);
-  const double& operator()(int row, int col) const;
+  double& operator()(int row, int col) const;
 
   // fill matrix & print
   void Fill(double n);
