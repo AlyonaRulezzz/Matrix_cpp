@@ -330,15 +330,15 @@ TEST(Accessor_Mutator, Accessor) {
 TEST(Accessor_Mutator, Mutator) {
   S21Matrix m1;
   m1.Fill(4, 0.4);
-  m1.Pr();
-  cout << "\n";
+  // m1.Pr();
+  // cout << "\n";
   m1.SetRows(2);
-  m1.SetCols(4);
+  m1.SetCols(5);
 
   EXPECT_ANY_THROW(m1.SetRows(0));
   EXPECT_ANY_THROW(m1.SetCols(-2););
 
-	m1.Pr();
+	// m1.Pr();
 }
 
 int main(int argc, char *argv[]) {
