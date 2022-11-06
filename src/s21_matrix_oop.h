@@ -1,9 +1,9 @@
 #ifndef __S21MATRIX_H__
 #define __S21MATRIX_H__
 
-#include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <iostream>
 
 class S21Matrix {
  private:
