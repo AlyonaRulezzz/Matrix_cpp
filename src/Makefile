@@ -43,7 +43,7 @@ clean:
 	@rm -rf *.o *.a test gcov_test *.gcno *.gcda *.info report *.dSYM
 	
 style:
-	# cp ../materials/linters/.clang-format ./
+	cp ../materials/linters/.clang-format ./
 	clang-format -i *.h *.cc
 	clang-format -n *.h *.cc
 
