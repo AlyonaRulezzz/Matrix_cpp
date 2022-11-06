@@ -321,6 +321,26 @@ TEST(Operator, Index) {
   EXPECT_EQ(0, m2(0, 0));
 }
 
+TEST(Accessor_Mutator, Accessor) {
+  S21Matrix m1(4, 5);
+  EXPECT_EQ(4, m1.GetRows());
+  EXPECT_EQ(5, m1.GetCols());
+}
+
+TEST(Accessor_Mutator, Mutator) {
+  S21Matrix m1;
+  m1.Fill(4, 0.4);
+  m1.Pr();
+  cout << "\n";
+  m1.SetRows(2);
+  m1.SetCols(4);
+
+  EXPECT_ANY_THROW(m1.SetRows(0));
+  EXPECT_ANY_THROW(m1.SetCols(-2););
+
+	m1.Pr();
+}
+
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

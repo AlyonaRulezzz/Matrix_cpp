@@ -104,8 +104,64 @@ S21Matrix::~S21Matrix() {
 
 // accessors and mutators
 int S21Matrix::GetRows() const { return rows_; }
+
 int S21Matrix::GetCols() const { return cols_; }
+
 double** S21Matrix::GetMatrix() const { return matrix_; }
+
+void S21Matrix::SetRows(int rows) {
+  if (rows <= 0) { 
+    throw::out_of_range("Incorrect input, index is less or equal to zero");
+  }
+  if (rows_ <= rows) {
+    S21Matrix tmp(rows, cols_);
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols_; j++) {
+        if (i <rows_) {
+          tmp.matrix_[i][j] = matrix_[i][j];
+        } else {
+          tmp.matrix_[i][j] = 0;
+        }
+      }
+    }
+  *this = tmp;
+  } else {
+    for (int i = 0; i < rows; i++) {
+      if (i >= rows) {
+        delete matrix_[i];
+      }
+    }
+  }
+  rows_ = rows;
+}
+
+void S21Matrix::SetCols(int cols) {
+  if (cols <= 0) { 
+    throw::out_of_range("Incorrect input, index is less or equal to zero");
+  }
+  if (cols_ <= cols) {
+    S21Matrix tmp(rows_, cols);
+    for (int i = 0; i < rows_; i++) {
+      for (int j = 0; j < cols; j++) {
+        if (j < cols_) {
+          tmp.matrix_[i][j] = matrix_[i][j];
+        } else {
+          tmp.matrix_[i][j] = 0;
+        }
+      }
+    }
+  *this = tmp;
+  } else {
+    for (int i = 0; i < rows_; i++) {
+      for (int j = 0; j < cols; j++) {
+        if (j >= cols) {
+          delete &matrix_[i][j];
+        }
+      }
+    }
+  }
+  cols_ = cols;
+}
 
 // add functions
 void S21Matrix::Fill(double n) {
