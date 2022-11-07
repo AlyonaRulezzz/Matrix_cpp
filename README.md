@@ -2,9 +2,6 @@
 
 Implementation of the s21_matrix_oop.h library.
 
-The russian version of the task can be found in the repository.
-
-
 ## Contents
 
 1. [Chapter I](#chapter-ii) \
